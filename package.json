@@ -1,6 +1,6 @@
 {
   "name": "mock-easy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "mock easy for front-end develop",
   "main": "index.js",
   "scripts": {
