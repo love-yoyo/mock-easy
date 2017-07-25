@@ -1,0 +1,12 @@
+{
+  "name": "mock-easy",
+  "version": "0.1.0",
+  "description": "mock easy for front-end develop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "King",
+  "license": "ISC"
+}
