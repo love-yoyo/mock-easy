@@ -8,5 +8,13 @@
   },
   "keywords": [],
   "author": "King",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/love-yoyo/mock-easy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/love-yoyo/mock-easy/issues"
+  },
+  "homepage": "https://github.com/love-yoyo/mock-easy#readme"
 }
