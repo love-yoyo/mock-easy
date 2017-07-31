@@ -24,3 +24,10 @@ exports.findApi = (url, cb) => {
         cb(err, ret);
     })
 };
+
+exports.updateApi = (key, model, cb) => {
+    console.log(key);
+    db.update(key, model, {}, (err, ret) => {
+        cb(err, ret);
+    })
+};

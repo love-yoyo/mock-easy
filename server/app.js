@@ -1,6 +1,7 @@
 var os = require('os');
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var config = require('./config');
 var response = require('./response');
@@ -37,6 +38,40 @@ app.all('/amdin/web/*', (req, res) => {
 app.all('/admin-api/*', (req, res) => {
     let originUrl = req.originalUrl;
     let body = req.body;
+    if (originUrl.indexOf('update') > 0) {
+        response.updateApi({ url: body.url }, body, (err, ret) => {
+            if (!err) {
+                console.log(ret);
+                if (ret) {
+                    res.json({
+                        errorCode: '',
+                        errorMsg: '接口更新成功'
+                    });
+                    return;
+                }
+            }
+            res.json({
+                errorCode: '',
+                errorMsg: '接口更新失败'
+            });
+        });
+        return;
+    } else if (originUrl.indexOf('find') > 0) {
+        response.findApi({ url: body.url }, (err, ret) => {
+            if (!err) {
+                console.log(ret);
+                if (ret) {
+                    res.json(ret);
+                } else {
+                    res.json({
+                        errorCode: '',
+                        errorMsg: '接口添加成功'
+                    });
+                }
+            }
+        });
+        return;
+    }
     response.findApi({ url: body.url }, (err, ret) => {
         if (!err) {
             console.log(ret);
@@ -61,7 +96,27 @@ app.all('/admin-api/*', (req, res) => {
 
 });
 
-app.all('/mapi/*', (req, res) => {
+var corsOptionsDelegate = function(req, callback) {
+    var corsOptions;
+    let reqPath = req.path;
+    reqPath = reqPath.replace(/^\/mapi/g, '');
+    response.findApi({ url: reqPath }, (err, ret) => {
+        if (!err) {
+            if (!ret) {
+                corsOptions = { origin: true };
+                return;
+            }
+            if (ret.notAllowCros) {
+                corsOptions = { origin: false };
+            }
+        } else {
+            corsOptions = { origin: true };
+        }
+        callback(null, corsOptions);
+    });
+};
+
+app.all('/mapi/*', cors(corsOptionsDelegate), (req, res) => {
     let originUrl = req.originalUrl;
     let reqPath = req.path;
     console.log('originUrl: ' + reqPath);

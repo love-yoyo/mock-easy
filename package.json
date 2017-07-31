@@ -4,7 +4,7 @@
   "description": "mock easy for front-end develop",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node server/app.js"
   },
   "keywords": [],
   "author": "King",
@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/love-yoyo/mock-easy/issues"
   },
-  "homepage": "https://github.com/love-yoyo/mock-easy#readme"
+  "homepage": "https://github.com/love-yoyo/mock-easy#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.3",
+    "nedb": "^1.8.0"
+  }
 }
